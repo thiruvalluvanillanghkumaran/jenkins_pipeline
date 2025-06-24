@@ -10,7 +10,7 @@ pipeline {
             steps {
                 script {
                     def userInput = input(
-                        message: 'Waiting for approval...',
+                        message: 'QA approval needed',
                         ok: 'Approve',
                         cancel: 'Reject'
                     )
@@ -19,7 +19,23 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                echo 'Working on deploy stage'
+                echo 'Working on deploy QA'
+            }
+        }
+        stage('Approval') {
+            steps {
+                script {
+                    def userInput = input(
+                        message: 'Waiting for approval in stage Deploy',
+                        ok: 'Approve',
+                        cancel: 'Reject'
+                    )
+                }
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo 'Working on deploy Stage'
             }
         }
     }
