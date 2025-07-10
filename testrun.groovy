@@ -6,17 +6,6 @@ pipeline {
                 echo 'Working on build stage'
             }
         }
-        stage('Approval') {
-            steps {
-                script {
-                    def userInput = input(
-                        message: 'QA approval needed',
-                        ok: 'Approve',
-                        cancel: 'Reject'
-                    )
-                }
-            }
-        }
         stage('Deploy') {
             steps {
                 echo 'Working on deploy QA'
